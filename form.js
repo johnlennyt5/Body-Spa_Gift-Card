@@ -1,66 +1,7 @@
 function form() {
   return `
-
-  <style>
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
-  
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
-  }
-  
-  .container {
-    color: black;
-    border: 1px solid rgb(199, 199, 199);
-    width: 17.5rem;
-    border-radius: 5px;
-    padding: 20px; 
-    font-size: 12px;
-    margin-top: 20px;
-    margin-left: 10px;
-    margin-bottom: 60px;
-    box-shadow: 0 2px 40px rgba(0, 0, 0, 1); /* Box shadow properties */
-  }
-  
-  
-  .form-input {
-    border-radius: 5px;
-    border: 1px solid rgb(199, 199, 199);
-    width: 16.8rem;
-  }
-  
-  .form-message {
-    height: rem;
-    width: 16.8rem;
-  }
-  
-  
-  .form-select{
-    border-radius: 5px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
-    font-size: 12px;
-  }
-  
-  .form-button {
-    border-radius: 5px;
-  }
-    </style>
-
     <div class="container">
-    <h2>Welcome to Butter Day Spa</h2>
+    <p>Welcome to Butter Day Spa</p>
     <form method="POST" action="/submit">
 
     <div class="form-label">
@@ -242,7 +183,67 @@ function form() {
     </div>
 
     </form>
-    <div>
+</div>
+<style>
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.container {
+  color: black;
+  border: 1px solid rgb(199, 199, 199);
+  width: 17.5rem;
+  border-radius: 5px;
+  padding: 20px; 
+  font-size: 12px;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-bottom: 60px;
+  box-shadow: 0 2px 40px rgba(0, 0, 0, 1); /* Box shadow properties */
+}
+
+
+.form-input {
+  border-radius: 5px;
+  border: 1px solid rgb(199, 199, 199);
+  width: 16.8rem;
+}
+
+.form-message {
+  height: rem;
+  width: 16.8rem;
+}
+
+
+.form-select{
+  border-radius: 5px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  font-size: 12px;
+}
+
+.form-button {
+  border-radius: 5px;
+}
+
+
+</style>
   `;
 }
 

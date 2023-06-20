@@ -1,5 +1,5 @@
 const express = require('express');
-const { form } = require('./form.js');
+const { form2 } = require('./form2.js');
 const fs = require('fs');
 const pdfMake = require('pdfmake/build/pdfmake.js');
 const pdfFonts = require('pdfmake/build/vfs_fonts.js');
@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.send(`${form()}`);
+  res.send(`${form2()}`);
 });
 
 app.post('/submit', (req, res) => {
