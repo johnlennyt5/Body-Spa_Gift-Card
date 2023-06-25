@@ -63,8 +63,8 @@ body {
     box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
   }
   
-  form input:focus,
-  form select:focus {
+ form input:focus,
+ form select:focus {
     background: rgba(255, 255, 255, 0.1);
     box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
   }
@@ -134,9 +134,9 @@ body {
     }
   
     .drop-3 {
-      height: 100px;
-      width: 100px;
-      bottom: 120px;
+      height: 140px;
+      width: 140px;
+      bottom: 300px;
       right: -50px;
       z-index: -1;
     }
@@ -149,9 +149,9 @@ body {
     }
   
     .drop-5 {
-      height: 60px;
-      width: 60px;
-      bottom: 170px;
-      left: 90px;
+      height: 130px;
+      width: 130px;
+      bottom: 100px;
+      left: -40px;
       z-index: -1;
     }
