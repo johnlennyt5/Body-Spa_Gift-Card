@@ -1,3 +1,8 @@
+function validateEmail(email) {
+  var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailPattern.test(email);
+}
+
 function generatePDF() {
   var recipientFirstName = document.getElementById('recipientFirstName').value;
   var recipientLastName = document.getElementById('recipientLastName').value;
@@ -7,6 +12,30 @@ function generatePDF() {
   var voucher = document.getElementById('voucher').value;
   var costCode = document.getElementById('costCode').value;
   var message = document.getElementById('message').value;
+  var buyerEmail = document.getElementById('buyerEmail').value;
+  var recipientEmail = document.getElementById('recipientEmail').value;
+
+  if (
+    recipientFirstName === '' ||
+    recipientLastName === '' ||
+    buyerFirstName === '' ||
+    giftName === '' ||
+    initials === '' ||
+    voucher === '' ||
+    costCode === '' ||
+    message === '' ||
+    buyerEmail === '' ||
+    recipientEmail === ''
+  ) {
+    console.log('Please fill out all the required fields.');
+    return false; // Prevent form submission
+  }
+
+  // Validate email formats
+  if (!validateEmail(buyerEmail) || !validateEmail(recipientEmail)) {
+    console.log('Invalid email format.');
+    return false; // Prevent form submission
+  }
 
   var image = new Image();
   image.setAttribute('crossOrigin', 'anonymous');
@@ -30,50 +59,52 @@ function generatePDF() {
         }
       ],
       content: [
-    {
-      text: `${recipientFirstName} ${recipientLastName}`,
-      fontSize: 14,
-      bold: false,
-      margin: [0, 0, 0, 0],
-      alignment: 'left',
-      absolutePosition: { x: 115, y: 396 },
-    },
-    {
-      text: `${buyerFirstName}`,
-      fontSize: 14,
-      bold: false,
-      margin: [0, 0, 0, 0],
-      alignment: 'left',
-      absolutePosition: { x: 115, y: 418 },
-    },
-    {
-      text: `${giftName}`,
-      fontSize: 14,
-      bold: false,
-      margin: [0, 0, 0, 0],
-      alignment: 'left',
-      absolutePosition: { x: 115, y: 440 },
-    },
-    {
-      text: `${initials}-${voucher}-${costCode}`,
-      fontSize: 18,
-      bold: false,
-      margin: [0, 0, 0, 0],
-      alignment: 'left',
-      absolutePosition: { x: 435, y: 460 },
-    },
-    {
-      text: `${message}`,
-      fontSize: 14,
-      bold: false,
-      margin: [0, 0, 0, 15],
-      alignment: 'left',
-      absolutePosition: { x: 52, y: 463 },
-    },
-  ],
-};
-pdfMake.createPdf(docDefinition).download('ButterDaySpaGC.pdf');
+        {
+          text: recipientFirstName + recipientLastName,
+          fontSize: 14,
+          bold: false,
+          margin: [0, 0, 0, 0],
+          alignment: 'left',
+          absolutePosition: { x: 115, y: 396 },
+        },
+        {
+          text: buyerFirstName,
+          fontSize: 14,
+          bold: false,
+          margin: [0, 0, 0, 0],
+          alignment: 'left',
+          absolutePosition: { x: 115, y: 418 },
+        },
+        {
+          text: giftName,
+          fontSize: 14,
+          bold: false,
+          margin: [0, 0, 0, 0],
+          alignment: 'left',
+          absolutePosition: { x: 115, y: 440 },
+        },
+        {
+          text: initials + '-' + voucher + '-' + costCode,
+          fontSize: 18,
+          bold: false,
+          margin: [0, 0, 0, 0],
+          alignment: 'left',
+          absolutePosition: { x: 435, y: 460 },
+        },
+        {
+          text: message,
+          fontSize: 14,
+          bold: false,
+          margin: [0, 0, 0, 15],
+          alignment: 'left',
+          absolutePosition: { x: 52, y: 463 },
+        },
+      ],
+    };
+
+    pdfMake.createPdf(docDefinition).download('ButterDaySpaGC.pdf');
   };
 
   image.src = './ButterDaySpa.png';
+  return false; // Prevent form submission
 }

@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-  <form id="pdfForm">
+  <form id="pdfForm" onsubmit="return generatePDF();">
     <p>Welcome to Butter Day Spa</p>
     <input type="text" 
   placeholder="BUYER FIRST NAME"
@@ -114,7 +114,7 @@ required
 class="form-input"
 />
 
-    <button type="button" onclick="generatePDF()">Generate PDF</button>
+    <button type="submit" onclick="generatePDF()">Generate PDF</button>
   </form>
 
   <div class="drops">
