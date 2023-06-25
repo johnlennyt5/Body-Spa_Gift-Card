@@ -1,9 +1,12 @@
+// Function to validate email format using a regular expression
 function validateEmail(email) {
   var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailPattern.test(email);
 }
 
+// Function to generate PDF
 function generatePDF() {
+  // Get values from input fields
   var recipientFirstName = document.getElementById('recipientFirstName').value;
   var recipientLastName = document.getElementById('recipientLastName').value;
   var buyerFirstName = document.getElementById('buyerFirstName').value;
@@ -15,6 +18,7 @@ function generatePDF() {
   var buyerEmail = document.getElementById('buyerEmail').value;
   var recipientEmail = document.getElementById('recipientEmail').value;
 
+  // Check if any of the required fields are empty
   if (
     recipientFirstName === '' ||
     recipientLastName === '' ||
@@ -37,10 +41,12 @@ function generatePDF() {
     return false; // Prevent form submission
   }
 
+  // Load the background image for the PDF
   var image = new Image();
   image.setAttribute('crossOrigin', 'anonymous');
 
   image.onload = function() {
+    // Create a canvas and set its dimensions
     var canvas = document.createElement('canvas');
     canvas.width = image.width;
     canvas.height = image.height;
@@ -48,8 +54,10 @@ function generatePDF() {
     var context = canvas.getContext('2d');
     context.drawImage(image, 0, 0);
 
+    // Convert the canvas to a data URL
     var imageUrl = canvas.toDataURL('image/png');
 
+    // Define the PDF document structure
     var docDefinition = {
       pageSize: 'LETTER',
       background: [
@@ -102,6 +110,7 @@ function generatePDF() {
       ],
     };
 
+    // Create and download the PDF
     pdfMake.createPdf(docDefinition).download('ButterDaySpaGC.pdf');
   };
 

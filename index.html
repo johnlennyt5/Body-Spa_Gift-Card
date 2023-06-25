@@ -2,21 +2,26 @@
 <html>
 <head>
   <title> Butter Day Spa </title>
+  <!-- Include the CSS file -->
   <link rel="stylesheet" type="text/css" href="./index.css">
+  <!-- Include the PDFMake library scripts -->
   <script src='build/pdfmake.min.js'></script>
   <script src='build/vfs_fonts.js'></script>
 </head>
 <body>
     <div class="container">
+  <!-- Form to generate PDF -->
   <form id="pdfForm" onsubmit="return generatePDF();">
     <p>Welcome to Butter Day Spa</p>
+    <!-- Input field for buyer's first name -->
     <input type="text" 
-  placeholder="BUYER FIRST NAME"
-  id="buyerFirstName" 
-  name="buyerFirstName" 
-  required 
-  class="form-input"
- />
+           placeholder="BUYER FIRST NAME"
+           id="buyerFirstName" 
+           name="buyerFirstName" 
+           required 
+           class="form-input"
+    />
+    <!-- Input field for recipient's first name -->
     <input type="text" 
            placeholder="RECIPIENT FIRST NAME"
            id="recipientFirstName" 
@@ -24,22 +29,23 @@
            required 
            class="form-input"
     /> 
-    <input
-    type="text"
-    placeholder="RECIPIENT LAST NAME"
-    name="recipientLastName"
-    id="recipientLastName"
-    required
-    class="form-input"
-  />
-  
-<input type="text" 
-placeholder="GIFT DISCRIPTION"
-id="giftDescription" 
-name="giftDescription" 
-required 
-class="form-input" />
-
+    <!-- Input field for recipient's last name -->
+    <input type="text"
+           placeholder="RECIPIENT LAST NAME"
+           name="recipientLastName"
+           id="recipientLastName"
+           required
+           class="form-input"
+    />
+    <!-- Input field for gift description -->
+    <input type="text" 
+           placeholder="GIFT DESCRIPTION"
+           id="giftDescription" 
+           name="giftDescription" 
+           required 
+           class="form-input" 
+    />
+    <!-- Dropdown select for gift name -->
 <select name='giftName' id='giftName' required class="form-select">
 <option value="Select Option">PLEASE SELECT AN OPTION</option>
 <option value="Swedish Massage">Swedish Massage</option>
@@ -64,68 +70,67 @@ class="form-input" />
 <option value="Two Hundred Dollars">Two Hundred Dollars ($200.00)</option>
 <option value="Spa Chi">Spa Chi</option>
 </select>
-
-<input
-type="text"
-placeholder="MESSAGE"
-name="message"
-id="message"
-required
-class="form-input"
+ <!-- Input field for message -->
+ <input type="text"
+ placeholder="MESSAGE"
+ name="message"
+ id="message"
+ required
+ class="form-input"
 />
-<input
-type="text"
-placeholder="INITIALS"
-name="initials"
-id="initials"
-required
-class="form-input"
+<!-- Input field for initials -->
+<input type="text"
+ placeholder="INITIALS"
+ name="initials"
+ id="initials"
+ required
+ class="form-input"
 />
-<input
-type="text"
-placeholder="VOUCHER"
-name="voucher"
-id="voucher"
-required
-class="form-input"
+<!-- Input field for voucher -->
+<input type="text"
+ placeholder="VOUCHER"
+ name="voucher"
+ id="voucher"
+ required
+ class="form-input"
 />
-<input
-type="text"
-placeholder="COST CODE"
-name="costCode"
-id="costCode"
-required
-class="form-input"
+<!-- Input field for cost code -->
+<input type="text"
+ placeholder="COST CODE"
+ name="costCode"
+ id="costCode"
+ required
+ class="form-input"
 />
-<input
-type="email"
-placeholder="RECIPIENT EMAIL ADDRESS"
-name="recipientEmail"
-id="recipientEmail"
-required
-class="form-input"
+<!-- Input field for recipient's email address -->
+<input type="email"
+ placeholder="RECIPIENT EMAIL ADDRESS"
+ name="recipientEmail"
+ id="recipientEmail"
+ required
+ class="form-input"
 />
-<input
-type="email"
-placeholder="BUYER EMAIL ADDRESS"
-name="buyerEmail"
-id="buyerEmail"
-required
-class="form-input"
+<!-- Input field for buyer's email address -->
+<input type="email"
+ placeholder="BUYER EMAIL ADDRESS"
+ name="buyerEmail"
+ id="buyerEmail"
+ required
+ class="form-input"
 />
-
-    <button type="submit" onclick="generatePDF()">Generate PDF</button>
-  </form>
-
-  <div class="drops">
-    <div class="drop drop-1"></div>
-    <div class="drop drop-2"></div>
-    <div class="drop drop-3"></div>
-    <div class="drop drop-4"></div>
-    <div class="drop drop-5"></div>
-  </div>
+<!-- Button to submit the form and generate PDF -->
+<button type="submit" onclick="generatePDF()">Generate PDF</button>
+</form>
+<!-- Animated drops -->
+<div class="drops">
+<div class="drop drop-1"></div>
+<div class="drop drop-2"></div>
+<div class="drop drop-3"></div>
+<div class="drop drop-4"></div>
+<div class="drop drop-5"></div>
 </div>
-  <script src="generatePdf.js"></script>
+</div>
+<!-- Include the JavaScript file for generating PDF -->
+<script src="generatePdf.js"></script>
 </body>
 </html>
-   
