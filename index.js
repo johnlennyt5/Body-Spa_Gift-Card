@@ -1,34 +1,44 @@
 const express = require('express');
-const { form2 } = require('./form2.js');
-const fs = require('fs');
+const app = express();
 const pdfMake = require('pdfmake/build/pdfmake.js');
 const pdfFonts = require('pdfmake/build/vfs_fonts.js');
-
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
-const app = express();
+const fs = require('fs');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('./')); 
 
 app.get('/', (req, res) => {
-  res.send(`${form2()}`);
-});
+    res.sendFile(path.join("./", 'index.html'));
+  });
+
 
 app.post('/submit', (req, res) => {
-  const {
-    recipientFirstName,
-    recipientLastName,
-    buyerFirstName,
-    giftName,
-    initials,
-    voucher,
-    costCode,
-    message,
-  } = req.body;
+  // Extract form data here and generate the PDF
+  const formData = req.body; // Remove .formData
+  generatePDF(req, res, formData); 
 
-  function generatePDF() {
-    // Read the image file
+  // Send a response to the client
+  res.send('PDF generated successfully!');
+});
+
+// Start the server
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
+
+function generatePDF(req, res, formData) {
+    const {
+      recipientFirstName,
+      recipientLastName,
+      buyerFirstName,
+      giftName,
+      initials,
+      voucher,
+      costCode,
+      message,
+    } = formData;
+  
     fs.readFile('Butter Day Spa.png', (err, imageBuffer) => {
       if (err) {
         console.error('Error reading image file:', err);
@@ -104,17 +114,5 @@ app.post('/submit', (req, res) => {
     });
   }
 
-  generatePDF();
-});
-
-// Start the server
-const port = 3000;
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
-
-
-
-
-
+ 
 
