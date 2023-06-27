@@ -1,157 +1,157 @@
     
 body {
-    background: linear-gradient(45deg,  #3F5EFB, #DAA520);
-    height: 100vh;
-    font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(45deg,  #3F5EFB, #DAA520);
+  height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+  position: absolute;
+  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+}
+
+form {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 1.5rem;
+  height: 620px;
+  border-radius: 20px;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  box-shadow: 20px 20px 40px -6px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+}
+
+form p {
+  font-weight: 900;
+  color: #4c59ff;
+  opacity: 0.7;
+  font-size: 1.5rem;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+form input,
+form select {
+  background: transparent;
+  width: 400px;
+  padding: .5em;
+  margin-bottom: 1em;
+  border: none;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 5000px;
+  backdrop-filter: blur(5px);
+  box-shadow: 4px 4px 60px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.2s ease-in-out;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+form input:hover,
+form select:hover {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
+}
+
+form input:focus,
+form select:focus {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
+}
+
+form button {
+  margin-top: 30px;
+  margin-bottom: 3px;
+  width: 175px;
+  font-size: 1rem;
+  padding: .25rem;
+  border-radius: 5000px;
+
+}
+
+form button:hover {
+  cursor: pointer;
+  background-color: #7FFF00;
+}
+
+form button:active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+form:hover {
+    margin: 25px;
   }
-  
-  .container {
-    position: absolute;
-    transform: translate(-50%,-50%);
-    top: 50%;
-    left: 50%;
-  }
-  
-  form {
-    background: rgba(255, 255, 255, 0.3);
-    padding: 1.5rem;
-    height: 620px;
-    border-radius: 20px;
-    border-left: 1px solid rgba(255, 255, 255, 0.3);
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(10px);
-    box-shadow: 20px 20px 40px -6px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    position: relative;
-    transition: all 0.2s ease-in-out;
-  }
-  
-  form p {
-    font-weight: 900;
-    color: #4c59ff;
-    opacity: 0.7;
-    font-size: 1.5rem;
-    margin-top: 10px;
-    margin-bottom: 25px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  }
-  
-  form input,
-  form select {
-    background: transparent;
-    width: 400px;
-    padding: .5em;
-    margin-bottom: 1em;
-    border: none;
-    border-left: 1px solid rgba(255, 255, 255, 0.3);
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 5000px;
-    backdrop-filter: blur(5px);
-    box-shadow: 4px 4px 60px rgba(0, 0, 0, 0.2);
-    color: #fff;
+
+  ::placeholder {
     font-family: Montserrat, sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    transition: all 0.2s ease-in-out;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    text-align: center;
+    font-weight: 400;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
   }
-  
-  form input:hover,
-  form select:hover {
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
+
+  a,
+  input:focus,
+  select:focus,
+  textarea:focus,
+  button:focus {
+    outline: none;
   }
-  
- form input:focus,
- form select:focus {
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
+
+  .drop {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 10px 10px 60px -8px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    transition: all 0.2s ease;
   }
-  
-  form button {
-    margin-top: 5px;
-    margin-bottom: 3px;
-    width: 175px;
-    font-size: 1rem;
-    padding: .25rem;
-    border-radius: 5000px;
-  
+
+  .drop-1 {
+    height: 80px;
+    width: 80px;
+    top: -20px;
+    left: -40px;
+    z-index: -1;
   }
-  
-  form button:hover {
-    cursor: pointer;
-    background-color: #7FFF00;
+
+  .drop-2 {
+    height: 80px;
+    width: 80px;
+    bottom: -30px;
+    right: -10px;
   }
-  
-  form button:active {
-    background: rgba(255, 255, 255, 0.2);
+
+  .drop-3 {
+    height: 140px;
+    width: 140px;
+    bottom: 300px;
+    right: -50px;
+    z-index: -1;
   }
-  
-  form:hover {
-      margin: 25px;
-    }
-  
-    ::placeholder {
-      font-family: Montserrat, sans-serif;
-      font-weight: 400;
-      color: #fff;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-    }
-  
-    a,
-    input:focus,
-    select:focus,
-    textarea:focus,
-    button:focus {
-      outline: none;
-    }
-  
-    .drop {
-      background: rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(10px);
-      border-radius: 10px;
-      border-left: 1px solid rgba(255, 255, 255, 0.3);
-      border-top: 1px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 10px 10px 60px -8px rgba(0, 0, 0, 0.2);
-      position: absolute;
-      transition: all 0.2s ease;
-    }
-  
-    .drop-1 {
-      height: 80px;
-      width: 80px;
-      top: -20px;
-      left: -40px;
-      z-index: -1;
-    }
-  
-    .drop-2 {
-      height: 80px;
-      width: 80px;
-      bottom: -30px;
-      right: -10px;
-    }
-  
-    .drop-3 {
-      height: 140px;
-      width: 140px;
-      bottom: 300px;
-      right: -50px;
-      z-index: -1;
-    }
-  
-    .drop-4 {
-      height: 120px;
-      width: 120px;
-      top: -60px;
-      right: -60px;
-    }
-  
-    .drop-5 {
-      height: 130px;
-      width: 130px;
-      bottom: 100px;
-      left: -40px;
-      z-index: -1;
-    }
+
+  .drop-4 {
+    height: 120px;
+    width: 120px;
+    top: -60px;
+    right: -60px;
+  }
+
+  .drop-5 {
+    height: 130px;
+    width: 130px;
+    bottom: 100px;
+    left: -40px;
+    z-index: -1;
+  }

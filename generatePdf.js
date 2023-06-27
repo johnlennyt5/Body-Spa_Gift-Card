@@ -1,9 +1,3 @@
-// Function to validate email format using a regular expression
-function validateEmail(email) {
-  var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailPattern.test(email);
-}
-
 // Function to generate PDF
 function generatePDF() {
   // Get values from input fields
@@ -18,28 +12,6 @@ function generatePDF() {
   var buyerEmail = document.getElementById('buyerEmail').value;
   var recipientEmail = document.getElementById('recipientEmail').value;
 
-  // Check if any of the required fields are empty
-  if (
-    recipientFirstName === '' ||
-    recipientLastName === '' ||
-    buyerFirstName === '' ||
-    giftName === '' ||
-    initials === '' ||
-    voucher === '' ||
-    costCode === '' ||
-    message === '' ||
-    buyerEmail === '' ||
-    recipientEmail === ''
-  ) {
-    console.log('Please fill out all the required fields.');
-    return false; // Prevent form submission
-  }
-
-  // Validate email formats
-  if (!validateEmail(buyerEmail) || !validateEmail(recipientEmail)) {
-    console.log('Invalid email format.');
-    return false; // Prevent form submission
-  }
 
   // Load the background image for the PDF
   var image = new Image();
@@ -93,7 +65,7 @@ function generatePDF() {
         },
         {
           text: initials + '-' + voucher + '-' + costCode,
-          fontSize: 18,
+          fontSize: 14,
           bold: false,
           margin: [0, 0, 0, 0],
           alignment: 'left',
