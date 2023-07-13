@@ -12,7 +12,6 @@ function generatePDF() {
   var buyerEmail = document.getElementById('buyerEmail').value;
   var recipientEmail = document.getElementById('recipientEmail').value;
 
-
   // Load the background image for the PDF
   var image = new Image();
   image.setAttribute('crossOrigin', 'anonymous');
@@ -40,7 +39,7 @@ function generatePDF() {
       ],
       content: [
         {
-          text: recipientFirstName +''+ recipientLastName,
+          text: recipientFirstName + ' ' + recipientLastName,
           fontSize: 14,
           bold: false,
           margin: [0, 0, 0, 0],
@@ -82,8 +81,46 @@ function generatePDF() {
       ],
     };
 
-    // Create and download the PDF
-    pdfMake.createPdf(docDefinition).download('ButterDaySpaGC.pdf');
+    // Create the PDF
+    var pdfDocGenerator = pdfMake.createPdf(docDefinition);
+
+    // Open the PDF in a new browser tab
+    pdfDocGenerator.getBlob(function(blob) {
+      var url = URL.createObjectURL(blob);
+
+      // Create a new message content object
+      var messageContent = {
+        recipientFirstName: recipientFirstName,
+        buyerFirstName: buyerFirstName,
+        giftName: giftName,
+        voucher: voucher,
+        costCode: costCode,
+        url: url
+      };
+
+      // Retrieve existing alert messages from local storage
+      var alertMessages = JSON.parse(localStorage.getItem('alertMessages')) || [];
+
+      // Add the new message content to the existing alert messages
+      alertMessages.push(messageContent);
+
+      // Save the updated alert messages to local storage
+      localStorage.setItem('alertMessages', JSON.stringify(alertMessages));
+
+      // Clear the form fields
+      document.getElementById('recipientFirstName').value = '';
+      document.getElementById('recipientLastName').value = '';
+      document.getElementById('buyerFirstName').value = '';
+      document.getElementById('giftName').value = '';
+      document.getElementById('initials').value = '';
+      document.getElementById('voucher').value = '';
+      document.getElementById('costCode').value = '';
+      document.getElementById('message').value = '';
+      document.getElementById('buyerEmail').value = '';
+      document.getElementById('recipientEmail').value = '';
+
+      openModal(messageContent);
+    });
   };
 
   image.src = './ButterDaySpa.png';

@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="En">
 <head>
+  <meta charset="utf-8">
   <title> Butter Day Spa </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Include the CSS file -->
   <link rel="stylesheet" type="text/css" href="./index.css">
   <!-- Include the PDFMake library scripts -->
-  <script src='build/pdfmake.min.js'></script>
-  <script src='build/vfs_fonts.js'></script>
+  <script src="build/pdfmake.min.js"></script>
+  <script src="build/vfs_fonts.js"></script>
 </head>
 <body>
     <div class="container">
@@ -36,7 +38,7 @@
     />
 
     <!-- Dropdown select for gift name -->
-<select name='giftName' id='giftName' required class="form-select">
+<select name='giftName' id='giftName' required class="form-select" title="Select Gift Name">
 <option value="Select Option">PLEASE SELECT AN OPTION</option>
 <option value="Swedish Massage">Swedish Massage</option>
 <option value="Deep Tissue Massage">Deep Tissue Massage</option>
@@ -103,7 +105,7 @@
  class="form-input"
 />
 <!-- Button to submit the form and generate PDF -->
-<button type="submit" onclick="generatePDF()">Generate PDF</button>
+<button type="submit">Generate PDF</button>
 </form>
 <!-- Animated drops -->
 <div class="drops">
@@ -114,7 +116,29 @@
 <div class="drop drop-5"></div>
 </div>
 </div>
-<!-- Include the JavaScript file for generating PDF -->
-<script src="generatePdf.js"></script>
+
+<footer class="footer-content">
+       <p>&copy; 2023 Butter Day Spa. All rights reserved.</p>
+       <div class="right-content">
+         <a href="messages.html" target="_blank">View Archive Pdf</a>
+       </div>
+     </footer>
+ 
+ <!-- Create modal-->
+ <div id="modalContainer" class="modal-container">
+       <div id="successModal" class="modal">
+         <div class="modal-content">
+           <span class="close">&times;</span>
+           <p id="successMessage"></p>
+         </div>
+       </div>
+     </div>
+  
+ <!-- Include the modal file for message display-->
+<script src="modal.js"></script>
+
+ <!-- Include the JavaScript file for generating PDF -->
+ <script src="generatePdf.js"></script>  
+ 
 </body>
 </html>
