@@ -39,7 +39,7 @@ function generatePDF() {
       ],
       content: [
         {
-          text: recipientFirstName + ' ' + recipientLastName,
+          text: recipientFirstName,
           fontSize: 14,
           bold: false,
           margin: [0, 0, 0, 0],
