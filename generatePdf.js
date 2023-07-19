@@ -107,18 +107,6 @@ function generatePDF() {
       // Save the updated alert messages to local storage
       localStorage.setItem('alertMessages', JSON.stringify(alertMessages));
 
-      // Clear the form fields
-      document.getElementById('recipientFirstName').value = '';
-      document.getElementById('recipientLastName').value = '';
-      document.getElementById('buyerFirstName').value = '';
-      document.getElementById('giftName').value = '';
-      document.getElementById('initials').value = '';
-      document.getElementById('voucher').value = '';
-      document.getElementById('costCode').value = '';
-      document.getElementById('message').value = '';
-      document.getElementById('buyerEmail').value = '';
-      document.getElementById('recipientEmail').value = '';
-
       openModal(messageContent);
     });
   };
