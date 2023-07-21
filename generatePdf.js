@@ -84,30 +84,47 @@ function generatePDF() {
     // Create the PDF
     var pdfDocGenerator = pdfMake.createPdf(docDefinition);
 
-    // Open the PDF in a new browser tab
+    // Get the PDF blob
     pdfDocGenerator.getBlob(function(blob) {
-      var url = URL.createObjectURL(blob);
+      // Create a new FormData object and append the PDF blob to it
+      var formData = new FormData();
+      formData.append('file', blob);
 
-      // Create a new message content object
-      var messageContent = {
-        recipientFirstName: recipientFirstName,
-        buyerFirstName: buyerFirstName,
-        giftName: giftName,
-        voucher: voucher,
-        costCode: costCode,
-        url: url
-      };
+      // Send the PDF blob to file.io using the fetch API
+      fetch('https://file.io', {
+        method: 'POST',
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // The file.io service will respond with a publicly accessible URL for the PDF
+          var publicPdfUrl = data.link; // Use the publicly accessible URL here
 
-      // Retrieve existing alert messages from local storage
-      var alertMessages = JSON.parse(localStorage.getItem('alertMessages')) || [];
+          // Create a new message content object
+          var messageContent = {
+            recipientFirstName: recipientFirstName,
+            buyerFirstName: buyerFirstName,
+            giftName: giftName,
+            voucher: voucher,
+            costCode: costCode,
+            url: publicPdfUrl,
+          };
 
-      // Add the new message content to the existing alert messages
-      alertMessages.push(messageContent);
+          // Retrieve existing alert messages from local storage
+          var alertMessages = JSON.parse(localStorage.getItem('alertMessages')) || [];
 
-      // Save the updated alert messages to local storage
-      localStorage.setItem('alertMessages', JSON.stringify(alertMessages));
+          // Add the new message content to the existing alert messages
+          alertMessages.push(messageContent);
 
-      openModal(messageContent);
+          // Save the updated alert messages to local storage
+          localStorage.setItem('alertMessages', JSON.stringify(alertMessages));
+
+          openModal(messageContent);
+        })
+        .catch((error) => {
+          console.error('Error uploading PDF:', error);
+          // Handle the error if necessary
+        });
     });
   };
 
