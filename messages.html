@@ -22,7 +22,7 @@
       var message = "Dear " + messageContent.recipientFirstName + ",<br><br>" +
     "Please find your " + messageContent.giftName + " gift certificate from " +
     messageContent.buyerFirstName + " via this link:<br><br>" +
-    messageContent.url;
+    "<a href='" + messageContent.url + "'>" + messageContent.url + "</a>" + " <br><br>" + "ButterDaySpaGC" +  "-" +messageContent.voucher +  "-" + messageContent.costCode ;
 
 
       // Set the paragraph content to the constructed message

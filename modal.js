@@ -10,11 +10,12 @@ function openModal(messageContent) {
   var successModal = document.getElementById("successModal");
   var successMessage = document.getElementById("successMessage");
 
-    // Create the message content for the modal with the PDF URL
-    var message = "Dear " + messageContent.recipientFirstName + ",<br><br>" +
+  // Create the message content for the modal with the PDF URL
+  var message = "Dear " + messageContent.recipientFirstName + ",<br><br>" +
     "Please find your " + messageContent.giftName + " gift certificate from " +
     messageContent.buyerFirstName + " via this link:<br><br>" +
-    messageContent.url;
+    "<a href='" + messageContent.url + "'>" + messageContent.url + "</a>";
+
 
   successMessage.innerHTML = message;
   modalContainer.style.display = "flex";
