@@ -87,11 +87,11 @@ function generatePDF() {
   // Get the PDF blob
   pdfDocGenerator.getBlob(function (blob) {
     // Create a new Dropbox client instance
-    var dropbox = new Dropbox.Dropbox({ accessToken: 'sl.Bi8gbz3gBubTWEG2TsFlaewak6gc6g7gLKui5c8WQPs31Fc2Z1fJi6I99KacBkX3pRYe1v5XJvAr88PP9HiUmgW280bLvdAIMX0uvacx_lWK7l9G68-Iq9ie0NIgyGMSqUI1sX5Ihu0kP8Ts25zhSHE', fetch: fetch, clientId: 'corjv3mmhxfugpn'});
+    var dropbox = new Dropbox.Dropbox({ accessToken: 'sl.Bi8TJuWeHgTSRgtyHKhDgZ5szsBDLuWULay1lWWOPbdY7mwsCk5Gke68CNU0pb_Hq_iY3lE46cAlK8NeipIi_2KXm0SmIWM1loEIZ-G6U6LoYOBMpfMBBwSyz6XLgJTRsS_KDqd5JQ277WFr2ka5tDs', fetch: fetch, clientId: 'corjv3mmhxfugpn'});
 
     // Set the path where the PDF will be uploaded in your Dropbox
   
-var filePath = '/path/to/your/folder/' + voucher + '.pdf';
+var filePath = '/PDF History/' + recipientFirstName + '_' + voucher + '.pdf';
 
 
     // Upload the PDF blob to Dropbox
