@@ -90,9 +90,8 @@ function generatePDF() {
     var dropbox = new Dropbox.Dropbox({ accessToken: 'sl.Bi8gbz3gBubTWEG2TsFlaewak6gc6g7gLKui5c8WQPs31Fc2Z1fJi6I99KacBkX3pRYe1v5XJvAr88PP9HiUmgW280bLvdAIMX0uvacx_lWK7l9G68-Iq9ie0NIgyGMSqUI1sX5Ihu0kP8Ts25zhSHE', fetch: fetch, clientId: 'corjv3mmhxfugpn'});
 
     // Set the path where the PDF will be uploaded in your Dropbox
-  // Set the path where the PDF will be uploaded in your Dropbox
   
-// var filePath = '/path/to/your/folder/' + voucher + '.pdf';
+var filePath = '/path/to/your/folder/' + voucher + '.pdf';
 
 
     // Upload the PDF blob to Dropbox
