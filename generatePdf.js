@@ -91,7 +91,7 @@ function generatePDF() {
 
     // Set the path where the PDF will be uploaded in your Dropbox
   
-var filePath = '/PDF History/' + recipientFirstName + '_' + voucher + '.pdf';
+var filePath = '/Pdf_History/' + recipientFirstName + '_' + voucher + '.pdf';
 
 
     // Upload the PDF blob to Dropbox
