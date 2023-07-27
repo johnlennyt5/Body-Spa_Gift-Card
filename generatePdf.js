@@ -81,53 +81,64 @@ function generatePDF() {
       ],
     };
 
-    // Create the PDF
-    var pdfDocGenerator = pdfMake.createPdf(docDefinition);
+  // Create the PDF
+  var pdfDocGenerator = pdfMake.createPdf(docDefinition);
 
-    // Get the PDF blob
-    pdfDocGenerator.getBlob(function(blob) {
-      // Create a new FormData object and append the PDF blob to it
-      var formData = new FormData();
-      formData.append('file', blob);
+  // Get the PDF blob
+  pdfDocGenerator.getBlob(function (blob) {
+    // Create a new Dropbox client instance
+    var dropbox = new Dropbox.Dropbox({ accessToken: 'sl.Bi8gbz3gBubTWEG2TsFlaewak6gc6g7gLKui5c8WQPs31Fc2Z1fJi6I99KacBkX3pRYe1v5XJvAr88PP9HiUmgW280bLvdAIMX0uvacx_lWK7l9G68-Iq9ie0NIgyGMSqUI1sX5Ihu0kP8Ts25zhSHE', fetch: fetch, clientId: 'corjv3mmhxfugpn'});
 
-      // Send the PDF blob to file.io using the fetch API
-      fetch('https://file.io', {
-        method: 'POST',
-        body: formData,
+    // Set the path where the PDF will be uploaded in your Dropbox
+  // Set the path where the PDF will be uploaded in your Dropbox
+  
+// var filePath = '/path/to/your/folder/' + voucher + '.pdf';
+
+
+    // Upload the PDF blob to Dropbox
+    dropbox
+      .filesUpload({ path: filePath, contents: blob })
+      .then(function (response) {
+        // Get the publicly accessible URL of the uploaded PDF file
+        dropbox
+          .sharingCreateSharedLinkWithSettings({ path: response.path_display })
+          .then(function (sharedLinkResponse) {
+            // The sharedLinkResponse contains the URL for the uploaded PDF
+            var publicPdfUrl = sharedLinkResponse.url;
+
+            // Create a new message content object
+            var messageContent = {
+              recipientFirstName: recipientFirstName,
+              buyerFirstName: buyerFirstName,
+              giftName: giftName,
+              voucher: voucher,
+              costCode: costCode,
+              url: publicPdfUrl,
+            };
+
+            // Retrieve existing alert messages from local storage
+            var alertMessages = JSON.parse(localStorage.getItem('alertMessages')) || [];
+
+            // Add the new message content to the existing alert messages
+            alertMessages.push(messageContent);
+
+            // Save the updated alert messages to local storage
+            localStorage.setItem('alertMessages', JSON.stringify(alertMessages));
+
+            openModal(messageContent);
+          })
+          .catch(function (error) {
+            console.error('Error creating shared link:', error);
+            // Handle the error if necessary
+          });
       })
-        .then((response) => response.json())
-        .then((data) => {
-          // The file.io service will respond with a publicly accessible URL for the PDF
-          var publicPdfUrl = data.link; // Use the publicly accessible URL here
+      .catch(function (error) {
+        console.error('Error uploading PDF:', error);
+        // Handle the error if necessary
+      });
+  });
+};
 
-          // Create a new message content object
-          var messageContent = {
-            recipientFirstName: recipientFirstName,
-            buyerFirstName: buyerFirstName,
-            giftName: giftName,
-            voucher: voucher,
-            costCode: costCode,
-            url: publicPdfUrl,
-          };
-
-          // Retrieve existing alert messages from local storage
-          var alertMessages = JSON.parse(localStorage.getItem('alertMessages')) || [];
-
-          // Add the new message content to the existing alert messages
-          alertMessages.push(messageContent);
-
-          // Save the updated alert messages to local storage
-          localStorage.setItem('alertMessages', JSON.stringify(alertMessages));
-
-          openModal(messageContent);
-        })
-        .catch((error) => {
-          console.error('Error uploading PDF:', error);
-          // Handle the error if necessary
-        });
-    });
-  };
-
-  image.src = './ButterDaySpa.png';
-  return false; // Prevent form submission
+image.src = './ButterDaySpa.png';
+return false; // Prevent form submission
 }
