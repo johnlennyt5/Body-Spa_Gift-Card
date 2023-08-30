@@ -1,3 +1,6 @@
+const API_KEY = 'AKIAVH7HVKUXM6MU4FV4';
+const Secret_Key = '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'
+
 // Function to generate PDF
 function generatePDF() {
    // Set AWS SDK logger to console for debugging
@@ -91,8 +94,8 @@ function generatePDF() {
     pdfDocGenerator.getBlob(function(blob) {
       // Configure AWS SDK with your credentials
       AWS.config.update({
-        accessKeyId: 'AKIAVH7HVKUXM6MU4FV4',
-        secretAccessKey: 'itfD8HQqxHn/rrGT5jOsFYdJ7R/Ad+EScK1DMMKw',
+        accessKeyId: API_KEY,
+        secretAccessKey: Secret_Key,
         region: 'us-east-1'
       });
 
