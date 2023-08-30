@@ -1,5 +1,6 @@
 const API_KEY = 'AKIAVH7HVKUXM6MU4FV4';
 const Secret_Key = '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'
+const Bucket_Name = 'butter-day-spa';
 
 // Function to generate PDF
 function generatePDF() {
@@ -102,13 +103,12 @@ function generatePDF() {
       // Initialize S3 object
       var s3 = new AWS.S3();
 
-      // Define S3 bucket and file path
-      var bucketName = 'butter-day-spa';
+      // Define file path
       var filePath = recipientFirstName + '_' + voucher + '.pdf';
 
       // Upload the PDF blob to AWS S3
       s3.upload({
-        Bucket: bucketName,
+        Bucket: Bucket_Name,
         Key: filePath,
         Body: blob,
         ContentType: 'application/pdf',
