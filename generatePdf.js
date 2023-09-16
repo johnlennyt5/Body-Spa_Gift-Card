@@ -1,6 +1,23 @@
-const Access_KEY = 'AKIAVH7HVKUXM6MU4FV4';
-const Secret_Key = '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'
-const Bucket_Name = 'cooltestbuck';
+var Access_Key, Bucket_Name, My_Email, Secret_Key
+
+
+fetch("https://0h8yefe8q3.execute-api.us-east-1.amazonaws.com/Test/SpaFunction")
+.then((response) => response.json())
+.then((data) => {
+    // Access the environment variables from the response
+          Access_Key = data.Access_Key;
+          Bucket_Name = data.Bucket_Name;
+          My_Email = data.My_Email;
+          Secret_Key = data.Secret_Key;
+
+    // Use the variables as needed in your client-side code
+    console.log(Access_Key, Bucket_Name, My_Email, Secret_Key);
+
+})
+.catch((error) => {
+    console.error("Error fetching environment variables:", error);
+});
+
 
 // Function to generate PDF
 function generatePDF() {
@@ -95,7 +112,7 @@ function generatePDF() {
     pdfDocGenerator.getBlob(function(blob) {
       // Configure AWS SDK with your credentials
       AWS.config.update({
-        accessKeyId: Access_KEY,
+        accessKeyId: Access_Key,
         secretAccessKey: Secret_Key,
         region: 'us-east-1'
       });
@@ -119,6 +136,38 @@ function generatePDF() {
         } else {
           // Get the public URL of the uploaded PDF
           var publicPdfUrl = data.Location;
+          
+          // Initialize SES object
+          var ses = new AWS.SES({ apiVersion: '2010-12-01' });
+
+          // Define email parameters
+          var params = {
+            Destination: {
+              ToAddresses: [recipientEmail]
+            },
+            Message: {
+              Body: {
+                Html: {
+                  Charset: 'UTF-8',
+                  Data: "Welceom to Butter Day Spa,<br /> Click the link below to view your gift certificate:<br />" + publicPdfUrl
+                }
+              },
+              Subject: {
+                Charset: 'UTF-8',
+                Data: 'Butter Day Spa Gift Certificate'
+              }
+            },
+            Source: My_Email
+          };
+
+          // Send the email
+          ses.sendEmail(params, function (err, data) {
+            if (err) {
+              console.error(err, err.stack);
+            } else {
+              console.log(data);
+            }
+          });
 
           // Create a new message content object
           var messageContent = {
@@ -127,7 +176,7 @@ function generatePDF() {
             giftName: giftName,
             voucher: voucher,
             costCode: costCode,
-            url: publicPdfUrl,
+            url: publicPdfUrl
           };
 
           // Retrieve existing alert messages from local storage

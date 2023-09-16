@@ -31,14 +31,14 @@ Region: Select the AWS region where you want your bucket to be located.
 
 <!-- Step 4: Object Ownership (Optional) -->
 
-In this section we want to click on:  
+In the Object Ownership  section we want to click on:  
 
 ACLs ENABLED followed by BUCKET OWNER PREFERRED
 
 
 <!-- Step 5: Block Public Access settings in bucket-->
 
-In this section:
+In the Block Public Access settings section:
 
 unclick block all public access then:
 
@@ -69,6 +69,8 @@ encryption type is going to be the default:
 * Server-side encryption with Amazon S3 managed keys (SSE-S3)
 
 then bucket key: is set to ENABlE
+
+click create bucket
 
 This will redirect you back to console
 
@@ -119,6 +121,8 @@ then click save changes at the bottom of the page:
     }
 ]
 
+click save changes
+
 <!-- Step 11: Getting access key and screy access key -->
 
 In the main nav bar where search is located go all the way to the right and click on last nav element
@@ -128,9 +132,13 @@ a dropdown menu should appear click on
 
 scroll to Access Key section and click Create access Key
 
-may or may not get message .. aceept and create key
+may or may not get message ..
 
-copy both the access key and secret ass key into a file for later use...
+click i understand ...
+
+ aceept and create key
+
+copy both the access key and secret key into a file for later use...
 
 <!-- Step 12: Place bucket name, access key & secret key into program -->
 
