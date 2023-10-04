@@ -158,3 +158,240 @@ const Bucket_Name = 'your-bucket-name';
 'us-east-1' can be found in console url -->
 
 
+<!-----------------PERMISSIONS-------------------------->
+
+1) sign into aws amazon account
+
+2) In search bar type IAM,, next click 
+
+             IAM
+Manage access to AWS resources
+
+3) Inside the IAM Dashboard look to left column under
+        Access Mananegment
+        click on users and select user used in code above
+
+4) in users under permission tab you are going to click 
+                add permissons then click (add permissons)
+
+5) click on add permissons directly 
+    Next type in and check off 
+
+        amazonS3fullaccess
+        amazonsesfullaccess
+        awslambda_fullaccess
+
+    then click next and on the follwing page 
+            click add permissions
+
+6) once back at the user page click on add permissons again
+        this time click inline policy
+
+    next to the visual button click on json 
+
+    delete json file and past this inside 
+
+     {
+	     "Version": "2012-10-17",
+	        "Statement": [
+		        {
+			      "Effect": "Allow",
+			     "Action": [
+				        "execute-api:Invoke",
+				        "execute-api:ManageConnections"
+			     ],
+			        "Resource": "*"
+		        }
+	     ]
+     }
+    Then scroll to the bottom of the page and click next
+        on the next page click save changes
+
+
+
+<!-----------------AMAZON IAM EXTENDED-------------------------->
+
+1) n the search bar type IAM and click on
+                IAM
+2)  From the Dashboardin in the menu to the left look for 
+         Access management and click on Roles
+
+3)  next click on create roles
+
+4)  Select - AWS SERVICE 
+    in he next section under USE CASE Menu Select LAMBDA
+
+5)   under USE CASE Menu Select LAMBDA and click next
+    
+6) Under permissons we will be adding 
+
+        amazonS3fullaccess
+        amazonsesfullaccess
+        awslambda_fullaccess
+
+    then click next 
+7) on this page set custom role name 
+    i used (secretKeys)
+    then click Create role
+
+8) now from the dashboard select the role you just created
+
+9) in the permissons tab select add permissions and choose inline
+
+10) next to the visual button click on json 
+
+    delete json file and past this inside 
+
+        {
+	     "Version": "2012-10-17",
+	        "Statement": [
+		        {
+			      "Effect": "Allow",
+			     "Action": [
+				        "execute-api:Invoke",
+				        "execute-api:ManageConnections"
+			     ],
+			        "Resource": "*"
+		        }
+	     ]
+     }
+    Then scroll to the bottom of the page and click next
+        on the next page click save changes
+
+11) type in any policy name (preferably the same used for user)
+        then click create policy
+12) 
+
+
+<!-----------------AMAZON SES-------------------------->
+
+1) in the search bar type SES and click on
+        Amazon Simple Email Service
+    Email Sending and Receiving Service
+
+2) from the ses home page click on create identity 
+        On this page select email
+        type in a valid email
+        and click create identity
+
+3) this will send an email to you email which you have to verify
+    once you verify refresh amazon ses page
+
+4) you will see a send test email icon now that your email 
+                is vefied click it
+
+
+5) to send test email 
+        email format : formatted
+
+        from adress: should have your email aldready inside
+
+        scenario: custom
+
+        custom recipient: same exactly email you have above
+    
+    then the Subject, Body and Config are all optional
+            whendone click send email
+        email should appear in yout email inbox to insure 
+        ses is working
+
+
+<!-----------------AMAZON LAMBDA-------------------------->
+
+1) in the search bar type Lambda and click on
+                Lambda
+2)  From the Dashboard click on create funciton
+
+3)  once on the create function page select AUTHOR FROM SCRATH
+
+4)  Next type in your uniue function name 
+        i used (SpaFunction)
+
+5)  under Runtime select - Node.js 18x
+    and under ARCHITECTURE select - x86_64
+    
+6)  under Execution Roles click use an exising role and select role you 
+            previously created
+
+7) then click create funciton
+
+
+8)  this will lead you to your lambda on this screen click on add trigger
+
+9) from there select API GATEWay
+
+10) under Intent select create a new API
+
+11) api type - HTTP API
+12) Security- Open
+
+13) Next click on additonal settings 
+        Here you can change your API and Stage name if you like 
+    Then select the Cross-orogin resource sharing
+
+    and click add
+
+14) scroll down in the code tab you should see Code source
+    delete everything inside the function and paste this inside 
+
+    export const handler = async (event) => {
+  // TODO implement
+  const response = {
+        statusCode: 200,
+        headers: {
+            "Access-Control-Allow-Origin": "*", // Allow cross-origin requests
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            Access_Key: process.env.Access_Key,
+            Bucket_Name: process.env.Bucket_Name,
+            My_Email: process.env.My_Email,
+            Secret_Key: process.env.Secret_Key,
+            
+        }),
+    };
+  return response;
+};
+
+15) next click into the configuration tab 
+
+16) once in this tab in the menu on the left hand side 
+    look for and select Enviroment variables tab
+
+17) click add enviormental variables 4 times and insert each key with corresponding value 
+   key          value  
+Access_Key	AKIAS7LQRQLC32PRMTEH  (INSERT YOUR OWN)
+Bucket_Name	spatestbucket  (INSERT YOUR OWN)
+My_Email	ospharaoh@gmail.com  (INSERT YOUR OWN)
+Secret_Key	E83xOFXJA0JEmiRroVOEcNseqk9IwC+WAUha0J1n  (INSERT YOUR OWN)
+
+and click save 
+
+<!-----------------API GATEWAY-------------------------->
+
+1) in the search bar type API and click on
+                API GATEWAY
+2)  From the Dashboard click on the API you created in the lambda function
+
+3)  in the API GATEWAY dashboard in the menu under Develop click on integrations
+
+4) choose an existing integrations and select the function you created
+     then click attach integration
+
+5) next under Develop click on CORS 
+        on the CORS page click configure
+
+6)  under Access-Control-Allow-Origin
+ add a  *
+
+under Access-Control-Allow-Headers
+add a  *
+
+under Access-Control-Allow-Methods
+add a  *
+
+under Access-Control-Expose-Headers
+No Expose Headers are allowed
+
+and click save 
+

@@ -1,6 +1,6 @@
 var Access_Key, Bucket_Name, My_Email, Secret_Key
 
-
+// Replace API
 fetch("https://0h8yefe8q3.execute-api.us-east-1.amazonaws.com/Test/SpaFunction")
 .then((response) => response.json())
 .then((data) => {
@@ -149,7 +149,7 @@ function generatePDF() {
               Body: {
                 Html: {
                   Charset: 'UTF-8',
-                  Data: "Welceom to Butter Day Spa,<br /> Click the link below to view your gift certificate:<br />" + publicPdfUrl
+                  Data: "Greetings from Butter Day Spa,<br /> Click the link below to view your gift certificate:<br />" + publicPdfUrl
                 }
               },
               Subject: {
