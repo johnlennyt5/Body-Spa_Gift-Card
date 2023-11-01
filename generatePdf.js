@@ -11,7 +11,7 @@ fetch("https://ot31hudl6j.execute-api.us-east-1.amazonaws.com/Test/SpaFunction")
           Secret_Key = data.Secret_Key;
 
     // Use the variables as needed in your client-side code
-    console.log(Access_Key, Bucket_Name, My_Email, Secret_Key);
+    // console.log(Access_Key, Bucket_Name, My_Email, Secret_Key);
 
 })
 .catch((error) => {
