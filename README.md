@@ -74,17 +74,45 @@ click create bucket
 
 This will redirect you back to console
 
+save Bucket Name to a file for LATER USE
+
 <!-- Step 9: Givin access to view Pdf -->
 
-From console home page duoble click on the blue bucket name you just created:  this will tak you into the bucket
+From console home page double click on the blue bucket name you just created:  this will tak you into the bucket
 
 next click on permissions tab next to properties
 
 from there we are going to scroll down to 
 
+          Bucket Policy 
+
+click edit button , clear contents in the json and paste this:
+
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "AllowLambdaAccess",
+			"Effect": "Allow",
+			"Principal": {
+				"Service": "lambda.amazonaws.com"
+			},
+			"Action": [
+				"s3:GetObject",
+				"s3:PutObject"
+			],
+			"Resource": "arn:aws:s3:::butter-day-spa1/*"
+		}
+	]
+}
+
+then click save changes button
+
+Next we are going to scroll down to 
+
           ACCESS CONTROL LIST(ACL) 
 
-click edit tab to the right of the window
+click edit button to the right of the window
 
 scroll to bottom of the list
 
@@ -138,15 +166,7 @@ click i understand ...
 
  aceept and create key
 
-copy both the access key and secret key into a file for later use...
-
-<!-- Step 12: Place bucket name, access key & secret key into program -->
-
-at the top of generatePdf.js insert your key in the correct field
-
-const Access_KEY = 'YOUR_ACCESS_KEY';
-const Secret_Key = 'YOUR_SECRET_KEY'
-const Bucket_Name = 'your-bucket-name';
+copy both the access key and secret key into a file for LATER USE...
 
 
  <!-- if you messed up on step: 3 and did not 
@@ -213,7 +233,7 @@ Manage access to AWS resources
 
 1) n the search bar type IAM and click on
                 IAM
-2)  From the Dashboardin in the menu to the left look for 
+2)  From the Dashboard in the menu to the left look for 
          Access management and click on Roles
 
 3)  next click on create roles
@@ -231,36 +251,9 @@ Manage access to AWS resources
 
     then click next 
 7) on this page set custom role name 
-    i used (secretKeys)
+    i used (ButterDaySpa-Roles)
     then click Create role
 
-8) now from the dashboard select the role you just created
-
-9) in the permissons tab select add permissions and choose inline
-
-10) next to the visual button click on json 
-
-    delete json file and past this inside 
-
-        {
-	     "Version": "2012-10-17",
-	        "Statement": [
-		        {
-			      "Effect": "Allow",
-			     "Action": [
-				        "execute-api:Invoke",
-				        "execute-api:ManageConnections"
-			     ],
-			        "Resource": "*"
-		        }
-	     ]
-     }
-    Then scroll to the bottom of the page and click next
-        on the next page click save changes
-
-11) type in any policy name (preferably the same used for user)
-        then click create policy
-12) 
 
 
 <!-----------------AMAZON SES-------------------------->
