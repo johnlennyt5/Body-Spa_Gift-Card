@@ -1,7 +1,7 @@
 var Access_Key, Bucket_Name, My_Email, Secret_Key
 
 // Replace API
-fetch("https://0h8yefe8q3.execute-api.us-east-1.amazonaws.com/Test/SpaFunction")
+fetch("https://ot31hudl6j.execute-api.us-east-1.amazonaws.com/Test/SpaFunction")
 .then((response) => response.json())
 .then((data) => {
     // Access the environment variables from the response

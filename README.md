@@ -123,7 +123,7 @@ then click save changes at the bottom of the page:
 
 click save changes
 
-<!-- Step 11: Getting access key and screy access key -->
+<!-- Step 11: Getting access key and secret access key -->
 
 In the main nav bar where search is located go all the way to the right and click on last nav element
 
