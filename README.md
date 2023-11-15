@@ -239,9 +239,10 @@ Manage access to AWS resources
 3)  next click on create roles
 
 4)  Select - AWS SERVICE 
-    in he next section under USE CASE Menu Select LAMBDA
 
-5)   under USE CASE Menu Select LAMBDA and click next
+    in the next section under the USE CASE Menu Select
+
+5)   LAMBDA and click next
     
 6) Under permissons we will be adding 
 
