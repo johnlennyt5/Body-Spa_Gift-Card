@@ -1,3 +1,6 @@
+var modalMessage ='';
+
+
 // Function to close the modal
 function closeModal() {
   var modalContainer = document.getElementById("modalContainer");

@@ -1,5 +1,29 @@
+var Access_Key, Bucket_Name, My_Email, Secret_Key
+
+// Replace API
+fetch("https://ot31hudl6j.execute-api.us-east-1.amazonaws.com/Test/SpaFunction")
+.then((response) => response.json())
+.then((data) => {
+    // Access the environment variables from the response
+          Access_Key = data.Access_Key;
+          Bucket_Name = data.Bucket_Name;
+          My_Email = data.My_Email;
+          Secret_Key = data.Secret_Key;
+
+    // Use the variables as needed in your client-side code
+    // console.log(Access_Key, Bucket_Name, My_Email, Secret_Key);
+
+})
+.catch((error) => {
+    console.error("Error fetching environment variables:", error);
+});
+
+
 // Function to generate PDF
 function generatePDF() {
+   // Set AWS SDK logger to console for debugging
+   AWS.config.logger = console;
+
   // Get values from input fields
   var recipientFirstName = document.getElementById('recipientFirstName').value;
   var recipientLastName = document.getElementById('recipientLastName').value;
@@ -81,63 +105,95 @@ function generatePDF() {
       ],
     };
 
-  // Create the PDF
-  var pdfDocGenerator = pdfMake.createPdf(docDefinition);
+    // Create the PDF
+    var pdfDocGenerator = pdfMake.createPdf(docDefinition);
 
-  // Get the PDF blob
-  pdfDocGenerator.getBlob(function (blob) {
-    // Create a new Dropbox client instance
-    var dropbox = new Dropbox.Dropbox({ accessToken: 'sl.Bi8TJuWeHgTSRgtyHKhDgZ5szsBDLuWULay1lWWOPbdY7mwsCk5Gke68CNU0pb_Hq_iY3lE46cAlK8NeipIi_2KXm0SmIWM1loEIZ-G6U6LoYOBMpfMBBwSyz6XLgJTRsS_KDqd5JQ277WFr2ka5tDs', fetch: fetch, clientId: 'corjv3mmhxfugpn'});
-
-    // Set the path where the PDF will be uploaded in your Dropbox
-  
-var filePath = '/Pdf_History/' + recipientFirstName + '_' + voucher + '.pdf';
-
-
-    // Upload the PDF blob to Dropbox
-    dropbox
-      .filesUpload({ path: filePath, contents: blob })
-      .then(function (response) {
-        // Get the publicly accessible URL of the uploaded PDF file
-        dropbox
-          .sharingCreateSharedLinkWithSettings({ path: response.path_display })
-          .then(function (sharedLinkResponse) {
-            // The sharedLinkResponse contains the URL for the uploaded PDF
-            var publicPdfUrl = sharedLinkResponse.url;
-
-            // Create a new message content object
-            var messageContent = {
-              recipientFirstName: recipientFirstName,
-              buyerFirstName: buyerFirstName,
-              giftName: giftName,
-              voucher: voucher,
-              costCode: costCode,
-              url: publicPdfUrl,
-            };
-
-            // Retrieve existing alert messages from local storage
-            var alertMessages = JSON.parse(localStorage.getItem('alertMessages')) || [];
-
-            // Add the new message content to the existing alert messages
-            alertMessages.push(messageContent);
-
-            // Save the updated alert messages to local storage
-            localStorage.setItem('alertMessages', JSON.stringify(alertMessages));
-
-            openModal(messageContent);
-          })
-          .catch(function (error) {
-            console.error('Error creating shared link:', error);
-            // Handle the error if necessary
-          });
-      })
-      .catch(function (error) {
-        console.error('Error uploading PDF:', error);
-        // Handle the error if necessary
+    // Get the PDF blob
+    pdfDocGenerator.getBlob(function(blob) {
+      // Configure AWS SDK with your credentials
+      AWS.config.update({
+        accessKeyId: Access_Key,
+        secretAccessKey: Secret_Key,
+        region: 'us-east-1'
       });
-  });
-};
 
-image.src = './ButterDaySpa.png';
-return false; // Prevent form submission
+      // Initialize S3 object
+      var s3 = new AWS.S3();
+
+      // Define file path
+      var filePath = recipientFirstName + '_' + voucher + '.pdf';
+
+      // Upload the PDF blob to AWS S3
+      s3.upload({
+        Bucket: Bucket_Name,
+        Key: filePath,
+        Body: blob,
+        ContentType: 'application/pdf',
+        ACL: 'public-read' 
+      }, function(err, data) {
+        if (err) {
+          console.error('Error uploading PDF to S3:', err);
+        } else {
+          // Get the public URL of the uploaded PDF
+          var publicPdfUrl = data.Location;
+          
+          // Initialize SES object
+          var ses = new AWS.SES({ apiVersion: '2010-12-01' });
+
+          // Define email parameters
+          var params = {
+            Destination: {
+              ToAddresses: [recipientEmail]
+            },
+            Message: {
+              Body: {
+                Html: {
+                  Charset: 'UTF-8',
+                  Data: "Greetings from Butter Day Spa,<br /> Click the link below to view your gift certificate:<br />" + publicPdfUrl
+                }
+              },
+              Subject: {
+                Charset: 'UTF-8',
+                Data: 'Butter Day Spa Gift Certificate'
+              }
+            },
+            Source: My_Email
+          };
+
+          // Send the email
+          ses.sendEmail(params, function (err, data) {
+            if (err) {
+              console.error(err, err.stack);
+            } else {
+              console.log(data);
+            }
+          });
+
+          // Create a new message content object
+          var messageContent = {
+            recipientFirstName: recipientFirstName,
+            buyerFirstName: buyerFirstName,
+            giftName: giftName,
+            voucher: voucher,
+            costCode: costCode,
+            url: publicPdfUrl
+          };
+
+          // Retrieve existing alert messages from local storage
+          var alertMessages = JSON.parse(localStorage.getItem('alertMessages')) || [];
+
+          // Add the new message content to the existing alert messages
+          alertMessages.push(messageContent);
+
+          // Save the updated alert messages to local storage
+          localStorage.setItem('alertMessages', JSON.stringify(alertMessages));
+
+          openModal(messageContent);
+        }
+      });
+    });
+  };
+
+  image.src = './ButterDaySpa.png';
+  return false; // Prevent form submission
 }
