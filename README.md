@@ -257,7 +257,7 @@ Manage access to AWS resources
 
 
 
-<!-----------------AMAZON SES-------------------------->
+<!------------------AMAZON SES-------------------------->
 
 1) in the search bar type SES and click on
         Amazon Simple Email Service
